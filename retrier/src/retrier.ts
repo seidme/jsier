@@ -5,107 +5,73 @@ export interface IRertyOptions {
   delay?: number;
   /** Delay before first attempt*/
   firstAttemptDelay?: number;
-  /** Treat resolved response as invalid and retry - if provided callback returns true */
-  keepRetryingIf?: Function;
-  /** Stop retrying and resolve if specific error - (provided callback returns true) */
-  stopRetryingIf?: Function;
+  /** Treat resolved value as invalid and retry - if provided callback returns true */
+  keepRetryingIf?: (value: any, attempt: number) => boolean;
+  /** Stop retrying (reject) if specific error - (provided callback returns true) */
+  stopRetryingIf?: (reason: any, attempt: number) => boolean;
 }
 
 export class Retrier {
-  private _fn: Function;
-  private _opts: IRertyOptions;
+  fn: (attempt?: number) => Promise<any>;
+  opts: IRertyOptions = {};
+  attempt = 0;
 
-  constructor(fn: Function, opts: IRertyOptions = {}) {
-    opts.limit = opts.limit || 1;
-    opts.delay = opts.delay || 0;
-    opts.firstAttemptDelay = opts.firstAttemptDelay || 0;
+  private _resolve: (value?: any) => void;
+  private _reject: (reason?: any) => void;
 
-    this._fn = fn;
-    this._opts = opts;
+  constructor(fn: (attempt?: number) => Promise<any>, opts: IRertyOptions = {}) {
+    this.fn = fn;
+
+    this.opts.limit = opts.limit || 1;
+    this.opts.delay = opts.delay || 0;
+    this.opts.firstAttemptDelay = opts.firstAttemptDelay || 0;
+    this.opts.keepRetryingIf = opts.keepRetryingIf;
+    this.opts.stopRetryingIf = opts.stopRetryingIf;
   }
 
   resolve(): Promise<any> {
-    return this._doRetry(0); // start
-  }
-
-  stopRetrying(): any {
-
-  } 
-
-  continueRetrying(): any {
-
-  }
-
-  private _doRetry(attempt = 0, recentError?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (attempt === this._opts.limit) {
-        return reject(recentError || new Error('Retry limit reached!'));
-      }
+      this._resolve = resolve;
+      this._reject = reject;
 
-      setTimeout(
-        () => {
-          const promise = this._fn(attempt);
-          if (!(promise instanceof Promise)) {
-            throw new Error('Expecting function which returns promise!');
-          }
-
-          promise.then(
-            response => {
-              if (this._opts.keepRetryingIf && this._opts.keepRetryingIf(response)) {
-                attempt++;
-                this._doRetry(attempt).then(resolve, reject);
-              } else {
-                resolve(response);
-              }
-            },
-            error => {
-              attempt++;
-              this._doRetry(attempt, error).then(resolve, reject);
-            }
-          );
-        },
-        attempt === 0 ? this._opts.firstAttemptDelay : this._opts.delay
-      );
+      this.attempt = 0;
+      this._doRetry(); // start
     });
   }
+
+  private _doRetry(recentError?: any): void {
+    if (this.attempt >= this.opts.limit) {
+      return this._reject(recentError || new Error('Retry limit reached!'));
+    }
+
+    setTimeout(
+      () => {
+        const promise = this.fn(this.attempt);
+        if (!(promise instanceof Promise)) {
+          // TODO: throw error in contructor if params aren't valid
+          return this._reject(new Error('Expecting function which returns promise!'));
+        }
+
+        promise.then(
+          response => {
+            if (this.opts.keepRetryingIf && this.opts.keepRetryingIf(response, this.attempt)) {
+              this.attempt++;
+              this._doRetry();
+            } else {
+              this._resolve(response);
+            }
+          },
+          error => {
+            if (this.opts.stopRetryingIf && this.opts.stopRetryingIf(error, this.attempt)) {
+              this._reject(error);
+            } else {
+              this.attempt++;
+              this._doRetry(error);
+            }
+          }
+        );
+      },
+      this.attempt === 0 ? this.opts.firstAttemptDelay : this.opts.delay
+    );
+  }
 }
-
-// export const resolveWithRetrying = (fn: Function, opts: IRertyOptions = {}): Promise<any> => {
-//   opts.limit = opts.limit || 1;
-//   opts.delay = opts.delay || 0;
-
-//   const doRetry = (attempt = 0, recentError?: any): Promise<any> => {
-//     return new Promise((resolve, reject) => {
-//       if (attempt === opts.limit) {
-//         return reject(recentError || new Error('Retry limit reached!'));
-//       }
-
-//       setTimeout(
-//         () => {
-//           const promise = fn(attempt);
-//           if (!(promise instanceof Promise)) {
-//             throw new Error('Expecting function which returns promise!');
-//           }
-
-//           promise.then(
-//             response => {
-//               if (opts.keepRetryingIf && opts.keepRetryingIf(response)) {
-//                 attempt++;
-//                 doRetry(attempt).then(resolve, reject);
-//               } else {
-//                 resolve(response);
-//               }
-//             },
-//             error => {
-//               attempt++;
-//               doRetry(attempt, error).then(resolve, reject);
-//             }
-//           );
-//         },
-//         !opts.delayFirstAttempt && attempt === 0 ? 0 : opts.delay
-//       );
-//     });
-//   };
-
-//   return doRetry();
-// };

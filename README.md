@@ -1,16 +1,16 @@
 # jsier
-JS uitilities
+JS Uitilities
 
 
 Retrier
 
-# build and run
+# Build and run
 npm start 
 
-# test
+# Test
 npm test
 
-# usage
+# Usage
 const callback = (attempt: number) => new Promise((resolve, reject) => resolve('Immediate resolve!'));
 const options = { limit: 5, delay: 2000, firstAttemptDelay: 5000 };
 
