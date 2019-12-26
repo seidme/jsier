@@ -2,11 +2,13 @@
   "name": "@jsier/retrier",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/src/retrier.js",
+  "types": "./dist/src/retrier.d.ts",
   "scripts": {
     "start": "tsc && node ./dist/src/retrier.js",
     "test": "tsc && node ./node_modules/jasmine/bin/jasmine.js",
-    "test-init": "node ./node_modules/jasmine/bin/jasmine.js init"
+    "test-init": "node ./node_modules/jasmine/bin/jasmine.js init",
+    "build-and-publish": "tsc && npm publish --access public"
   },
   "author": "Seid Mehmedovic",
   "license": "MIT",

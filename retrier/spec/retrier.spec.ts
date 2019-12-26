@@ -1,5 +1,3 @@
-// Run test: npm test
-
 import { Retrier } from '../src/retrier';
 
 describe('<< Package: retrier >>', () => {

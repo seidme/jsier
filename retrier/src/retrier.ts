@@ -1,5 +1,3 @@
-// Build and run: npm start 
-
 export interface IRertyOptions {
   /** Number of attempts */
   limit?: number;
