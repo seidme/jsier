@@ -1,21 +1,43 @@
 # @jsier/Retrier
+A simple and lightweight package without external dependencies which helps you quickly implement JavaScript retry logic. **Retrier** class is built with [TypeScript](http://www.typescriptlang.org/) (preserves full compatibility with pure JavaScript) and exposes intuitive and easy-to-use API. 
 
-## Build and run
-npm start 
 
-## Test
-npm test
-
-## Usage
+## Getting Started
+```bash
+$ npm install @jsier/retrier --save
 ```
-const callback = (attempt: number) => new Promise((resolve, reject) => resolve('Immediate resolve!'));
-const options = { limit: 5, delay: 2000, firstAttemptDelay: 5000 };
 
-const retrier = new Retrier(callback, options);
+## Basic Example
+```javascript
+import { Retrier } from "@jsier/retrier";
 
-retrier.resolve().then((result) => {
-  console.log('result:', result); // -> Immediate resolve!
-}, error => {
-  console.error(error);
-});
+const options = { limit: 5, delay: 2000 };
+const resolve = (attempt) => {
+  return new Promise((resolve, reject) => reject('Immediate reject!'));
+};
+
+const retrier = new Retrier(resolve, options);
+retrier.resolve().then(
+  result => console.log(result),
+  error => console.error(error) // After 5 attempts logs: "Immediate reject!"
+);
 ```
+
+## Retry Options
+By default, the retrier will retry until provided promise resolves successfully or until retry limit is reached. To override the defaults please see retry options below:
+
+Property | Description | Type | Default
+--- | --- | --- | ---
+`limit` | Number of attempts. | number | `1`
+`delay` | Delay between attempts in milliseconds. | number | `0`
+`firstAttemptDelay` | Delay first attempt. | number | `0`
+`keepRetryingIf` | Treat resolved value as invalid and keep retrying - if provided function returns truthy value. Example: `keepRetryingIf: (response, attempt) => response.status === 202;` | Function | `undefined`
+`stopRetryingIf` | Stop retrying (reject) if specific error - (provided function returns truthy value). Example: `stopRetryingIf: (error, attempt) => error.status === 500;` | Function | `undefined`
+
+
+## Support
+All suggestions and improvements are welcomed and appreciated.
+
+
+## License
+The MIT [License](https://github.com/seidme/jsier/blob/master/LICENSE).
