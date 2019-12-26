@@ -7,7 +7,9 @@ A simple and lightweight package without external dependencies which helps you q
 $ npm install @jsier/retrier --save
 ```
 
-## Basic Example
+## Usage
+Retrier constructor as a first argument expects function which returns a promise. Second argument is optional and expects [retry options](#retry-options) object.
+
 ```javascript
 import { Retrier } from "@jsier/retrier";
 
