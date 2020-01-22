@@ -14,7 +14,7 @@ Retrier constructor as a first argument expects function which returns a promise
 import { Retrier } from '@jsier/retrier';
 
 const options = { limit: 5, delay: 2000 };
-const retrier = new Retrier({ limit: 5, delay: 2000 });
+const retrier = new Retrier(options);
 retrier
   .resolve(attempt => new Promise((resolve, reject) => reject('Rejected!')))
   .then(
