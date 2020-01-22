@@ -1,6 +1,6 @@
 
 <p align="center">
-	<img src="logo.jpg" width="120" height="120" alt="jsier"/>
+	<img src="logo.png" width="120" height="120" alt="jsier"/>
 </p>
 
 # @jsier
