@@ -40,4 +40,4 @@ All suggestions and improvements are welcomed and appreciated.
 
 
 ## License
-The MIT [License](https://github.com/seidme/jsier/blob/master/LICENSE).
+The [MIT License](https://github.com/seidme/jsier/blob/master/LICENSE).
