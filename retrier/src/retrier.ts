@@ -19,9 +19,7 @@ export class Retrier {
   private _resolve: (value?: any) => void;
   private _reject: (reason?: any) => void;
 
-  constructor(fn: (attempt?: number) => Promise<any>, opts: IRertyOptions = {}) {
-    this.fn = fn;
-
+  constructor(opts: IRertyOptions = {}) {
     this.opts.limit = opts.limit || 1;
     this.opts.delay = opts.delay || 0;
     this.opts.firstAttemptDelay = opts.firstAttemptDelay || 0;
@@ -29,7 +27,9 @@ export class Retrier {
     this.opts.stopRetryingIf = opts.stopRetryingIf;
   }
 
-  resolve(): Promise<any> {
+  resolve(fn: (attempt?: number) => Promise<any>): Promise<any> {
+    this.fn = fn;
+
     return new Promise((resolve, reject) => {
       this._resolve = resolve;
       this._reject = reject;
