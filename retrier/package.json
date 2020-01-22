@@ -1,6 +1,6 @@
 {
   "name": "@jsier/retrier",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Promise based retry logic.",
   "main": "./dist/src/retrier.js",
   "types": "./dist/src/retrier.d.ts",

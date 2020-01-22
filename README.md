@@ -11,7 +11,7 @@ NPM scope for various JS utilities. All packages are built with [TypeScript](htt
 Name | Description | Version
 --- | --- | --- 
 [@jsier/common](https://github.com/seidme/jsier/tree/master/common)| Common and elementary utilities (other packages within the scope may also have dependency on it). |  1.0.0
-[@jsier/retrier](https://github.com/seidme/jsier/tree/master/retrier) | Promise based retry logic. | 1.2.0
+[@jsier/retrier](https://github.com/seidme/jsier/tree/master/retrier) | Promise based retry logic. | 1.2.1
 
 
 ## Support
