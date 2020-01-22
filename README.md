@@ -1,5 +1,5 @@
 
-![jsier-logo](https://github.com/seidme/jsier/edit/development/logo.jpg)
+![logo](logo.jpg)
 
 # @jsier
 NPM scope for various JS utilities. All packages are built with [TypeScript](http://www.typescriptlang.org/) (preserve full compatibility with pure JavaScript) and expose simple, intuitive and easy-to-use APIs.
