@@ -14,15 +14,13 @@ Retrier constructor as a first argument expects function which returns a promise
 import { Retrier } from '@jsier/retrier';
 
 const options = { limit: 5, delay: 2000 };
-const getPromise = (attempt) => {
-  return new Promise((resolve, reject) => reject('Rejected!'));
-};
-
-const retrier = new Retrier(getPromise, options);
-retrier.resolve().then(
-  result => console.log(result),
-  error => console.error(error) // After 5 attempts logs: "Rejected!"
-);
+const retrier = new Retrier({ limit: 5, delay: 2000 });
+retrier
+  .resolve(attempt => new Promise((resolve, reject) => reject('Rejected!')))
+  .then(
+    result => console.log(result),
+    error => console.error(error) // After 5 attempts logs: "Rejected!"
+  );
 ```
 
 ## Retry Options

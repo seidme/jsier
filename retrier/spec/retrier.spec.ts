@@ -10,7 +10,7 @@ describe('<< Package: retrier >>', () => {
 
     let error;
     try {
-      await new Retrier(cbToResolve as any).resolve();
+      await new Retrier().resolve(cbToResolve as any);
     } catch (e) {
       error = e;
     }
@@ -21,16 +21,16 @@ describe('<< Package: retrier >>', () => {
   describe('Simple resolve test:', () => {
     it('Should return Promise.', () => {
       const cbToResolve = () => new Promise((resolve, reject) => resolve('Resolved!'));
-      const retrier = new Retrier(cbToResolve);
+      const retrier = new Retrier();
 
-      expect(retrier.resolve() instanceof Promise).toBe(true);
+      expect(retrier.resolve(cbToResolve) instanceof Promise).toBe(true);
     });
 
     it('Should resolve promise within provided callback.', async () => {
       const cbToResolve = () => new Promise((resolve, reject) => resolve('Resolved!'));
-      const retrier = new Retrier(cbToResolve);
+      const retrier = new Retrier();
 
-      expect(await retrier.resolve()).toBe('Resolved!');
+      expect(await retrier.resolve(cbToResolve)).toBe('Resolved!');
     });
   });
 
@@ -38,11 +38,11 @@ describe('<< Package: retrier >>', () => {
     it('Should reject (error specified).', async () => {
       const cbToResolve = () => new Promise((resolve, reject) => reject(new Error('Rejected!')));
 
-      const retrier = new Retrier(cbToResolve);
+      const retrier = new Retrier();
 
       let error;
       try {
-        await retrier.resolve();
+        await retrier.resolve(cbToResolve);
       } catch (e) {
         error = e;
       }
@@ -53,11 +53,11 @@ describe('<< Package: retrier >>', () => {
     it('Should reject (error not specified).', async () => {
       const cbToResolve = () => new Promise((resolve, reject) => reject());
 
-      const retrier = new Retrier(cbToResolve);
+      const retrier = new Retrier();
 
       let error;
       try {
-        await retrier.resolve();
+        await retrier.resolve(cbToResolve);
       } catch (e) {
         error = e;
       }
@@ -73,11 +73,11 @@ describe('<< Package: retrier >>', () => {
       };
       spyOn(o, 'cbToResolve').and.callThrough();
 
-      const retrier = new Retrier(o.cbToResolve);
+      const retrier = new Retrier();
 
       let error;
       try {
-        await retrier.resolve();
+        await retrier.resolve(o.cbToResolve);
       } catch (e) {
         error = e;
       }
@@ -92,11 +92,11 @@ describe('<< Package: retrier >>', () => {
       };
       spyOn(o, 'cbToResolve').and.callThrough();
 
-      const retrier = new Retrier(o.cbToResolve, { limit: 3 });
+      const retrier = new Retrier({ limit: 3 });
 
       let error;
       try {
-        await retrier.resolve();
+        await retrier.resolve(o.cbToResolve);
       } catch (e) {
         error = e;
       }
@@ -117,12 +117,12 @@ describe('<< Package: retrier >>', () => {
       };
       spyOn(o, 'cbToResolve').and.callThrough();
 
-      const retrier = new Retrier(o.cbToResolve, { limit: 5 });
+      const retrier = new Retrier({ limit: 5 });
 
       let result;
       let error;
       try {
-        result = await retrier.resolve();
+        result = await retrier.resolve(o.cbToResolve);
       } catch (e) {
         error = e;
       }
@@ -139,12 +139,12 @@ describe('<< Package: retrier >>', () => {
       };
       spyOn(o, 'cbToResolve').and.callThrough();
 
-      const retrier = new Retrier(o.cbToResolve, { limit: 3, keepRetryingIf: (response, attempt) => true });
+      const retrier = new Retrier({ limit: 3, keepRetryingIf: (response, attempt) => true });
 
       let result;
       let error;
       try {
-        result = await retrier.resolve();
+        result = await retrier.resolve(o.cbToResolve);
       } catch (e) {
         error = e;
       }
@@ -165,12 +165,12 @@ describe('<< Package: retrier >>', () => {
       };
       spyOn(o, 'cbToResolve').and.callThrough();
 
-      const retrier = new Retrier(o.cbToResolve, { limit: 5, keepRetryingIf: (response, attempt) => true });
+      const retrier = new Retrier({ limit: 5, keepRetryingIf: (response, attempt) => true });
 
       let result;
       let error;
       try {
-        result = await retrier.resolve();
+        result = await retrier.resolve(o.cbToResolve);
       } catch (e) {
         error = e;
       }
@@ -187,7 +187,7 @@ describe('<< Package: retrier >>', () => {
       };
       spyOn(o, 'cbToResolve').and.callThrough();
 
-      const retrier = new Retrier(o.cbToResolve, {
+      const retrier = new Retrier({
         limit: 5,
         stopRetryingIf: (error, attempt) => error.message === 'Rejected!'
       });
@@ -195,7 +195,7 @@ describe('<< Package: retrier >>', () => {
       let result;
       let error;
       try {
-        result = await retrier.resolve();
+        result = await retrier.resolve(o.cbToResolve);
       } catch (e) {
         error = e;
       }
@@ -210,12 +210,12 @@ describe('<< Package: retrier >>', () => {
       };
       spyOn(o, 'cbToResolve').and.callThrough();
 
-      const retrier = new Retrier(o.cbToResolve, { limit: 5, stopRetryingIf: (error, attempt) => attempt === 2 });
+      const retrier = new Retrier({ limit: 5, stopRetryingIf: (error, attempt) => attempt === 2 });
 
       let result;
       let error;
       try {
-        result = await retrier.resolve();
+        result = await retrier.resolve(o.cbToResolve);
       } catch (e) {
         error = e;
       }
