@@ -1,4 +1,8 @@
 
+<p align="center">
+	<img src="logo.png" width="100" height="100" alt="jsier"/>
+</p>
+
 # @jsier
 NPM scope for various JS utilities. All packages are built with [TypeScript](http://www.typescriptlang.org/) (preserve full compatibility with pure JavaScript) and expose simple, intuitive and easy-to-use APIs.
 
