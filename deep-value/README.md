@@ -10,7 +10,7 @@ $ npm install @jsier/deep-value --save
 
 ## Usage
 `deepValue` as first argument expects object or array as a source. Second argument should be string representing the path to the targeted property.
-NOTE: Non-existing properties or invalid paths provided will return undefined as the result.
+Non-existing properties or invalid paths provided will return undefined as the result.
 
 ```javascript
 import { deepValue } from '@jsier/deep-value';
