@@ -1,0 +1,21 @@
+{
+  "name": "@jsier/deep-value",
+  "version": "1.2.0",
+  "description": "Safely resolves deep value of an object or array by providing path to the targeted property.",
+  "main": "./dist/src/deep-value.js",
+  "types": "./dist/src/deep-value.d.ts",
+  "scripts": {
+    "start": "tsc && node ./dist/src/deep-value.js",
+    "test": "tsc && node ./node_modules/jasmine/bin/jasmine.js",
+    "test-init": "node ./node_modules/jasmine/bin/jasmine.js init",
+    "build-and-publish": "tsc && npm publish --access public"
+  },
+  "author": "Seid Mehmedovic",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jasmine": "^3.4.5",
+    "jasmine": "^3.5.0",
+    "jasmine-ts-console-reporter": "^3.1.1",
+    "typescript": "^3.6.4"
+  }
+}

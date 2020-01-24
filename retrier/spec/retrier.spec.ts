@@ -1,6 +1,6 @@
 import { Retrier } from '../src/retrier';
 
-describe('<< Package: retrier >>', () => {
+describe('<< Package: Retrier >>', () => {
   it('Should be defined.', () => {
     expect(Retrier).toBeDefined();
   });
