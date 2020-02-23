@@ -1,6 +1,13 @@
 # @jsier/retrier
 A simple, efficient and lightweight package without external dependencies which helps quickly implement JavaScript promise based retry logic. **Retrier** class is built with [TypeScript](http://www.typescriptlang.org/) (preserves full compatibility with pure JavaScript) and exposes intuitive and easy-to-use API. 
 
+**Supports:**
+- First attempt delay
+- Delay between attempts
+- Limiting number of attempts
+- Callback to stop retrying if some condition is met (e.g. specific error is encountered)
+- Callback to keep retrying if some condition is met (e.g. resolved value is unsatisfactory)
+
 
 ## Getting Started
 ```bash
