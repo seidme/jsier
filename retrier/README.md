@@ -1,4 +1,6 @@
 # @jsier/retrier
+**Promise based retry logic**
+
 A simple, efficient and lightweight package without external dependencies which helps quickly implement JavaScript promise based retry logic. **Retrier** class is built with [TypeScript](http://www.typescriptlang.org/) (preserves full compatibility with pure JavaScript) and exposes intuitive and easy-to-use API. 
 
 **Supports:**
