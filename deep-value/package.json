@@ -1,6 +1,6 @@
 {
   "name": "@jsier/deep-value",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Safely resolves deep value of an object or array by providing path to the targeted property.",
   "main": "./dist/src/deep-value.js",
   "types": "./dist/src/deep-value.d.ts",
@@ -18,13 +18,17 @@
     "jasmine-ts-console-reporter": "^3.1.1",
     "typescript": "^3.6.4"
   },
-  "prettier":{
-    "printWidth": 120,
-    "tabWidth": 2,
-    "proseWrap": "never",
-    "singleQuote": true,
-    "disableLanguages": [
-      "html"
-    ]
+  "files": [
+    "dist/src"
+  ],
+  "keywords": [
+    "deep",
+    "property",
+    "resolve",
+    "path"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seidme/jsier/tree/master/deep-value"
   }
 }

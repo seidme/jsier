@@ -1,6 +1,6 @@
 {
   "name": "@jsier/retrier",
-  "version": "1.2.1",
+  "version": "1.2.4",
   "description": "Promise based retry logic.",
   "main": "./dist/src/retrier.js",
   "types": "./dist/src/retrier.d.ts",
@@ -18,13 +18,15 @@
     "jasmine-ts-console-reporter": "^3.1.1",
     "typescript": "^3.6.4"
   },
-  "prettier":{
-    "printWidth": 120,
-    "tabWidth": 2,
-    "proseWrap": "never",
-    "singleQuote": true,
-    "disableLanguages": [
-      "html"
-    ]
+  "files": [
+    "dist/src"
+  ],
+  "keywords": [
+    "retry",
+    "promise"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seidme/jsier/tree/master/retrier"
   }
 }
