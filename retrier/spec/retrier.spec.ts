@@ -1,6 +1,6 @@
 import { Retrier } from '../src/retrier';
 
-describe('<< Package: Retrier >>', () => {
+describe('Package: Retrier >>', () => {
   it('Should be defined.', () => {
     expect(Retrier).toBeDefined();
   });
@@ -18,7 +18,7 @@ describe('<< Package: Retrier >>', () => {
     expect(error.message).toBe('Expecting function which returns promise!');
   });
 
-  describe('Simple resolve test:', () => {
+  describe('Simple resolve test >>', () => {
     it('Should return Promise.', () => {
       const cbToResolve = () => new Promise((resolve, reject) => resolve('Resolved!'));
       const retrier = new Retrier();
@@ -34,7 +34,7 @@ describe('<< Package: Retrier >>', () => {
     });
   });
 
-  describe('Simple reject test:', () => {
+  describe('Simple reject test >>', () => {
     it('Should reject (error specified).', async () => {
       const cbToResolve = () => new Promise((resolve, reject) => reject(new Error('Rejected!')));
 
@@ -66,7 +66,7 @@ describe('<< Package: Retrier >>', () => {
     });
   });
 
-  describe('Resolve with retrying (basic cases with/without specifying limit):', () => {
+  describe('Resolve with retrying (basic cases with/without specifying limit) >>', () => {
     it('Should reject without retrying (wtihout specifying limit - default is 1).', async () => {
       const o: any = {
         cbToResolve: () => new Promise((resolve, reject) => reject(new Error('Rejected!')))
@@ -132,7 +132,7 @@ describe('<< Package: Retrier >>', () => {
     });
   });
 
-  describe('Resolve with retrying (advanced cases where retrying is continued even when success response):', () => {
+  describe('Resolve with retrying (advanced cases where retrying is continued even when success response) >>', () => {
     it('Should keep retrying till reaching the limit.', async () => {
       const o: any = {
         cbToResolve: () => new Promise((resolve, reject) => resolve('Resolved!'))
@@ -180,7 +180,7 @@ describe('<< Package: Retrier >>', () => {
     });
   });
 
-  describe('Resolve with retrying (advanced cases where retrying is stopped due to specific error):', () => {
+  describe('Resolve with retrying (advanced cases where retrying is stopped due to specific error) >>', () => {
     it('Should stop retrying after first attempt.', async () => {
       const o: any = {
         cbToResolve: () => new Promise((resolve, reject) => reject(new Error('Rejected!')))
@@ -225,7 +225,7 @@ describe('<< Package: Retrier >>', () => {
     });
   });
 
-  describe('Delays between attempts:', () => {
+  describe('Delays between attempts >>', () => {
     // TODO..
   });
 });

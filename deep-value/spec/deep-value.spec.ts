@@ -1,6 +1,6 @@
 import { deepValue } from '../src/deep-value';
 
-describe('<< Package: deep-value >>', () => {
+describe('Package: deep-value >>', () => {
   it('Should be defined.', () => {
     expect(deepValue).toBeDefined();
   });
@@ -16,7 +16,7 @@ describe('<< Package: deep-value >>', () => {
     expect(error.message).toBe('Expecting path to the value to be string.');
   });
 
-  describe('Testing value resolvings: ', () => {
+  describe('Testing value resolvings >>', () => {
     let testObj;
     beforeEach(() => {
       testObj = {
@@ -33,7 +33,7 @@ describe('<< Package: deep-value >>', () => {
       };
     });
 
-    describe('Array as source: ', () => {
+    describe('Array as source >>', () => {
       it('Case 1.', () => {
         expect(deepValue(testObj.obj.arr, '[0]')).toBe(testObj.obj.arr[0]);
       });
@@ -43,7 +43,7 @@ describe('<< Package: deep-value >>', () => {
       });
     });
 
-    describe('Object as source (extensive testing): ', () => {
+    describe('Object as source (extensive testing) >>', () => {
       it('Case 1.', () => {
         expect(deepValue(testObj, 'a')).toBe(testObj.a);
       });
@@ -114,7 +114,7 @@ describe('<< Package: deep-value >>', () => {
       });
     });
 
-    describe('Testing non-existing properties (should return undefined): ', () => {
+    describe('Testing non-existing properties (should return undefined) >>', () => {
       it('Case 1.', () => {
         expect(deepValue(testObj, '')).toBe(undefined);
       });
@@ -136,7 +136,7 @@ describe('<< Package: deep-value >>', () => {
       });
     });
 
-    describe('Testing invalid paths (should return undefined): ', () => {
+    describe('Testing invalid paths (should return undefined) >>', () => {
       it('Case 1.', () => {
         expect(deepValue(testObj, 'obj,a')).toBe(undefined);
       });
