@@ -34,7 +34,7 @@ deepValue(employee.children, '[0].gender'); // -> undefined
 
 
 ## Support
-All suggestions and improvements are welcomed and appreciated.
+All suggestions and improvements are welcome and appreciated.
 
 
 ## License
