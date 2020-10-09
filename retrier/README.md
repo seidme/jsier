@@ -17,7 +17,8 @@ $ npm install @jsier/retrier --save
 ```
 
 ## Usage
-Retrier constructor as a first argument expects function which returns a promise. Second argument is optional and expects [retry options](#retry-options) object.
+Retrier constructor expects optional [retry options](#retry-options) object.
+Resolve method expects function which returns a promise.
 
 ```javascript
 import { Retrier } from '@jsier/retrier';
