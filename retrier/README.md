@@ -1,5 +1,5 @@
-# @jsier/retrier
-**Promise based retry logic**
+# Javascript Retrier - Promise Based Retry Logic
+**@jsier/retrier**
 
 A simple, efficient and lightweight package without external dependencies which helps quickly implement JavaScript promise based retry logic. **Retrier** class is built with [TypeScript](http://www.typescriptlang.org/) (preserves full compatibility with pure JavaScript) and exposes intuitive and easy-to-use API. 
 
@@ -13,7 +13,7 @@ A simple, efficient and lightweight package without external dependencies which 
 
 ## Getting Started
 ```bash
-$ npm install @jsier/retrier --save
+$ npm i @jsier/retrier
 ```
 
 ## Usage

@@ -1,10 +1,11 @@
-# @jsier/deep-value
+# Javascript - Deep Value Resolver
+**@jsier/deep-value**
 A simple, efficient and lightweight package without external dependencies intended for safely resolving deep value of an object or array by providing path to the targeted property. `deepValue` is built with [TypeScript](http://www.typescriptlang.org/) (preserves full compatibility with pure JavaScript) and is easy to use. 
 
 
 ## Getting Started
 ```bash
-$ npm install @jsier/deep-value --save
+$ npm i @jsier/deep-value
 ```
 
 
