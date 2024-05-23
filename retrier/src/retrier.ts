@@ -1,4 +1,4 @@
-export interface IRertyOptions {
+export interface IRetryOptions {
   /** Number of attempts */
   limit?: number;
   /** Delay between attempts in milliseconds */
@@ -13,13 +13,13 @@ export interface IRertyOptions {
 
 export class Retrier {
   fn: (attempt?: number) => Promise<any>;
-  opts: IRertyOptions = {};
+  opts: IRetryOptions = {};
   attempt = 0;
 
   private _resolve: (value?: any) => void;
   private _reject: (reason?: any) => void;
 
-  constructor(opts: IRertyOptions = {}) {
+  constructor(opts: IRetryOptions = {}) {
     this.opts.limit = opts.limit || 1;
     this.opts.delay = opts.delay || 0;
     this.opts.firstAttemptDelay = opts.firstAttemptDelay || 0;
